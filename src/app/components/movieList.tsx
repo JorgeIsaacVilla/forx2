@@ -5,8 +5,15 @@ import Link from 'next/link';
 
 const API_KEY = "49951d31";
 
+type Movie = {
+  imdbID: string;
+  Title: string;
+  Year: string;
+  Poster: string;
+};
+
 export default function MovieList() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("movie");
   const [inputValue, setInputValue] = useState("");
@@ -58,7 +65,7 @@ export default function MovieList() {
 
       {/* Lista de películas */}
       <ul className="w-full p-4 max-w-[1800px] mx-auto flex flex-wrap gap-6 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 justify-center">
-        {movies.map((movie: any, index: number) => (
+         {movies.map((movie, index) => (
           <li key={index} className="flex flex-col items-center gap-1">
             <h3 className="text-center font-semibold">
               <Link href={`/movie/${movie.imdbID}`}>
