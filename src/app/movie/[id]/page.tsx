@@ -1,11 +1,15 @@
-import { Metadata } from 'next';
+import type { Metadata } from "next";
 
 const API_KEY = "49951d31";
 
+// ✅ Tipo unificado
 type MoviePageProps = {
-  params: { id: string };
+  params: {
+    id: string;
+  };
 };
 
+// ✅ Componente principal
 export default async function MoviePage({ params }: MoviePageProps) {
   const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${params.id}`);
   const data = await res.json();
@@ -13,7 +17,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
   if (data.Response === "False") {
     return <h1>Película no encontrada</h1>;
   }
-
+  
   return (
     <div className="p-8">
       <div className="flex flex-col md:flex-row gap-4 pt-[150px] items-center md:items-start">
