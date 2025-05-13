@@ -2,7 +2,11 @@ import { Metadata } from 'next';
 
 const API_KEY = "49951d31";
 
-export default async function MoviePage({ params }: { params: { id: string } }) {
+type MoviePageProps = {
+  params: { id: string };
+};
+
+export default async function MoviePage({ params }: MoviePageProps) {
   const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${params.id}`);
   const data = await res.json();
 
