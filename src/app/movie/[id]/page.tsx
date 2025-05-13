@@ -1,4 +1,4 @@
-// app/movie/[id]/page.tsx
+import { Metadata } from 'next';
 
 const API_KEY = "49951d31";
 
@@ -34,4 +34,14 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
       </div>
     </div>
   );
+}
+
+// Si necesitas agregar un título para la página:
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${params.id}`);
+  const data = await res.json();
+  
+  return {
+    title: data.Title || 'Película',
+  };
 }
